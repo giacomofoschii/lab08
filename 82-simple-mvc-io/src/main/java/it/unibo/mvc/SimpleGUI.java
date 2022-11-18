@@ -48,7 +48,7 @@ public final class SimpleGUI {
                 try {
                     controller.saveTextOnFile(textarea.getText());
                 } catch (IOException e1) {
-                    JOptionPane.showMessageDialog(frame, e1, "An error ocurr", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(frame, e1, "There was an error during execution", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
