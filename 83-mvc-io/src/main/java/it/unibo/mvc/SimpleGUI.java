@@ -19,13 +19,14 @@ public final class SimpleGUI {
         JTextField textField = new JTextField();
         canvas.add(textField, BorderLayout.NORTH);
         JTextArea textArea = new JTextArea();
+        textArea.setEditable(false);
         canvas.add(textArea, BorderLayout.CENTER);
 
-        JPanel buttonCanvas = new JPanel(new BorderLayout());
+        JPanel buttonCanvas = new JPanel(new GridLayout(1, 2));
         JButton print = new JButton("Print");
-        buttonCanvas.add(print, BorderLayout.LINE_START);
+        buttonCanvas.add(print);
         JButton showHistory = new JButton("Show history");
-        buttonCanvas.add(showHistory, BorderLayout.LINE_END);
+        buttonCanvas.add(showHistory);
 
         canvas.add(buttonCanvas, BorderLayout.SOUTH);
 
@@ -41,27 +42,19 @@ public final class SimpleGUI {
         print.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                try {
-                    controller.setNext(textField.getText());
-                    controller.printCurrent();
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(frame, e, "There was an error in execution", JOptionPane.ERROR_MESSAGE);
-                }
+                controller.setNext(textField.getText());
+                controller.printCurrent();
             }
         });
 
         showHistory.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                try {
-                    String s1 = new String();
-                    for (String s2 : controller.getHistory()) {
-                        s1 = s1 + s2 + "\n";
-                    }
-                    textArea.setText(s1);
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(frame, e, "There was an error in execution", JOptionPane.ERROR_MESSAGE);
+                String s1 = new String();
+                for (String s2 : controller.getHistory()) {
+                    s1 = s1 + s2 + "\n";
                 }
+                textArea.setText(s1);
             }
         });
     }
